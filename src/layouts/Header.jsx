@@ -36,7 +36,7 @@ function Header() {
     <HeaderStyled>
         <Nav>
             <div style={{display: 'flex', gap:'32px'}}>
-                <Link to="/">
+                <Link to="./">
                     <figure style={stylesFigure}>
                         <img style={stylesLogo} src={logo} alt="" />
                     </figure>
