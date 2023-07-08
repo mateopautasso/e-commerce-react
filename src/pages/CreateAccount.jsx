@@ -14,6 +14,7 @@ const MainContainer = styled.main`
     place-items: center;
     justify-content: center;
     align-items: center;
+    padding-top: 80px;
 `
 const FormContainer = styled.form`
     width: 400px;

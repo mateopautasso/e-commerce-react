@@ -1,3 +1,5 @@
+
+// Funcion Registrarse
 export function setAccountInLocalStorage(email, password, repeatPassword) {
     // Búsqueda del user en Local Storage
     const userInLocal = JSON.parse(window.localStorage.getItem('users'));
@@ -27,11 +29,27 @@ export function setAccountInLocalStorage(email, password, repeatPassword) {
     }
 }
 
+
+// Function Iniciar sesión
 export function getAccountInLocalStorage(email, password) {
-    return(
-        {
-            email: window.localStorage.getItem(email), 
-            password: window.localStorage.getItem(password)
-        }
-    )
+    const users = JSON.parse(window.localStorage.getItem('users'));
+    console.log(users);
+    let isRegister;
+    if(users !== null) {
+        isRegister = users.find(user => user.email === email);
+    }
+    if(!isRegister) return `Email no registrado.`;
+
+    const passwordIsOk = isRegister.password === password;
+    if(passwordIsOk) {
+        return(
+            {
+                email: email, 
+                password: password
+            }
+        )
+    } else {
+        return 'Contraseña incorrecta.'
+    }
+
 }
