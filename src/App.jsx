@@ -27,9 +27,9 @@ function App() {
         <Provider store={store}>
           <Header />
           <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/create' element={<CreateAccount />} />
+            <Route path='/e-commerce-react' element={<Home />} />
+            <Route path='/e-commerce-react/login' element={<Login />} />
+            <Route path='/e-commerce-react/create' element={<CreateAccount />} />
           </Routes>
         </Provider>
       </ThemeProvider>

@@ -55,7 +55,7 @@ function Login() {
   return (
     <MainContainer>
         <FormContainer method='post'>
-            <SectionTitle style={{marginBottom: '20px'}}>Mi cuenta</SectionTitle>
+            <SectionTitle style={{marginBottom: '20px'}}>Registrarse</SectionTitle>
 
             <CampForm action={handleEmail}
               typeInput='email'

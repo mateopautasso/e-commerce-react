@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 import CampForm from '../components/CampForm';
-import { PrimaryButton } from '../components/styled-components/StyledComponents';
+import { PrimaryButton, SectionTitle } from '../components/styled-components/StyledComponents';
 import { Link } from 'react-router-dom';
 
 const MainContainer = styled.main`
@@ -8,7 +8,6 @@ const MainContainer = styled.main`
     height: 100%;
     display: flex;
     flex-direction: column;
-    place-items: center;
     justify-content: center;
     align-items: center;
 `
@@ -40,13 +39,14 @@ function Login() {
   return (
     <MainContainer>
         <FormContainer>
+        <SectionTitle style={{marginBottom: '20px', textAlign: "start"}}>Ingresar</SectionTitle>
             <CampForm typeInput='email' idInput='emailLogin' nameInput='email' textLabel='Email' placeholder='ejemplo@gmail.com'/>
             <CampForm typeInput='password' idInput='passwordLogin' nameInput='password' textLabel='Contraseña' placeholder='*********'/>
             <PrimaryButton text='Iniciar Sesión' />
         </FormContainer>
         <CreateAccountContainer>
           <p>¿No tienes cuenta?</p>
-          <Link to="/create">
+          <Link to="/e-commerce-react/create">
             <PrimaryButton text='Crear Cuenta' isSecondary/>
           </Link>
         </CreateAccountContainer>

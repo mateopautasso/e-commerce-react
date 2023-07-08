@@ -40,7 +40,7 @@ function MenuDesktop() {
   return (
     <MenuDesktopContainer>
       <LoginP>
-        <Link to="login">
+        <Link to="/e-commerce-react/login">
           Iniciar Sesión
         </Link>
       </LoginP>
