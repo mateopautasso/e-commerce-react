@@ -6,20 +6,6 @@ export const SectionTitle = styled.h2`
     color: ${(props)=>props.theme.black}
 `;
 
-export const HeaderAnchors = styled.a`
-    font-size: ${(props)=>props.theme.fontMd};
-    font-weight: ${(props)=>props.theme.font500};
-    color: ${(props)=>props.theme.softPinkGrey};
-    display: block;
-    border-radius: 8px;
-    padding: 8px 14px;
-    cursor: pointer;
-    &.active {
-        border: 1px solid ${(props)=>props.theme.hospitalGreen};
-        color: ${(props)=>props.theme.hospitalGreen};
-    }
-`;
-
 export const ErrorP = styled.p`
     font-weight: ${(props)=>props.theme.font500};
     font-size: ${(props)=>props.theme.fontSm};
@@ -55,3 +41,24 @@ export function PrimaryButton({text, action, isSecondary}) {
         </Button>
     )
 }
+
+export const Loader = styled.div`
+    height: 6rem;
+    width: 6rem;
+
+    /* Create a curve at the top */
+    border: 6px solid #F7F7F7;
+    border-top-color:#ACD9B2;
+    border-radius: 50%;
+
+    animation: spinner 800ms linear infinite;
+
+    @keyframes spinner {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+`

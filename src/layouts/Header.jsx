@@ -1,22 +1,30 @@
-import { styled } from "styled-components";
-import { HeaderAnchors } from "../components/styled-components/StyledComponents";
-import { Link } from "react-router-dom";
+//Comps
 import logo from  "../assets/logos/logo_yard_sale.png";
 import EmailMenu from "../components/EmailMenu";
 import Cart from "../components/Cart";
+import HeaderAnchor from "../components/HeaderAnchor";
+import CardPreviewCart from "../components/CardPreviewCart";
+
+//Deps
+import { styled } from "styled-components";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useContext } from "react";
+import { HeaderContext } from "../context/HeaderContext";
 
 const HeaderStyled = styled.header`
     width: 100%;
-    height: 60px;
+    height: 10%;
     position: fixed;
     top: 0;
     left: 0;
-    box-shadow: 0px 3px 3px 0px rgba(247,247,247,1);
+    box-shadow: 0px 1px 10px 0px rgba(199,199,199,1);
     background-color: ${(props)=>props.theme.white}
 `
 const Nav = styled.nav`
     width: 100%;
     height: 100%;
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -32,6 +40,10 @@ const stylesLogo = {
 }
 
 function Header() {
+
+    const { category } = useSelector(store=>store.category);
+    const { menuCart } = useContext(HeaderContext)
+
   return (
     <HeaderStyled>
         <Nav>
@@ -43,28 +55,41 @@ function Header() {
                 </Link>
                 <ul style={{display: 'flex'}}>
                     <li>
-                        <HeaderAnchors>All</HeaderAnchors>
+                        <HeaderAnchor 
+                            isActive={category === "all" ? true : false}
+                            category="all">Todos
+                        </HeaderAnchor>
                     </li>
                     <li>
-                        <HeaderAnchors>Clothes</HeaderAnchors>
+                        <HeaderAnchor
+                            isActive={category === "clothes" ? true : false}
+                            category="clothes">Ropa
+                        </HeaderAnchor>
                     </li>
                     <li>
-                        <HeaderAnchors>Electronics</HeaderAnchors>
+                        <HeaderAnchor
+                        isActive={category === "accessories" ? true : false}
+                        category="accessories">Accesorios
+                        </HeaderAnchor>
                     </li>
                     <li>
-                        <HeaderAnchors>Forniture</HeaderAnchors>
+                        <HeaderAnchor
+                        isActive={category === "furnitureHome" ? true : false}
+                        category="furnitureHome">Muebles y Hogar
+                        </HeaderAnchor>
                     </li>
                     <li>
-                        <HeaderAnchors>Toys</HeaderAnchors>
-                    </li>
-                    <li>
-                        <HeaderAnchors>Others</HeaderAnchors>
+                        <HeaderAnchor
+                        isActive={category === "electronics" ? true : false}
+                        category="electronics">Electrónica
+                        </HeaderAnchor>
                     </li>
                 </ul>
             </div>
             <div style={{display: 'flex', gap:'24px'}}>
-                <EmailMenu></EmailMenu>
-                <Cart></Cart>
+                <EmailMenu />
+                <Cart />
+                <CardPreviewCart isActive={menuCart}/>
             </div>
         </Nav>
     </HeaderStyled>

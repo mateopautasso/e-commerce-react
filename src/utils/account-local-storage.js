@@ -33,7 +33,6 @@ export function setAccountInLocalStorage(email, password, repeatPassword) {
 // Function Iniciar sesión
 export function getAccountInLocalStorage(email, password) {
     const users = JSON.parse(window.localStorage.getItem('users'));
-    console.log(users);
     let isRegister;
     if(users !== null) {
         isRegister = users.find(user => user.email === email);

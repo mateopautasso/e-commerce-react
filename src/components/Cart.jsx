@@ -1,13 +1,16 @@
 import { styled } from 'styled-components';
 import cart from '../assets/icons/icon_shopping_cart.png';
 import cartWithProducts from '../assets/icons/icon_shopping_cart_notification.png';
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useContext } from 'react';
+import { HeaderContext } from '../context/HeaderContext';
 
 const Figure = styled.figure`
     width: 28px;
     padding: 4px;
-    height: auto;
+    max-height: 28px;
     position: relative;
+    cursor: pointer;
     &.with-products {
         width: 25px;
         height: auto;
@@ -22,22 +25,19 @@ const Img = styled.img`
 
 function Cart() {
 
-  const [productsInCart, setProductsInCart] = useState(0)
-  
-    const addProduct = ()=>{
-        setProductsInCart(productsInCart + 1)
-    }
+    const { inCart } = useSelector(store => store.cart);
+    const { openCloseMenuCart } = useContext(HeaderContext)
 
-    if(!productsInCart) {
+    if(inCart.length === 0) {
         return (
-            <Figure onClick={addProduct}>
-                <img src={cart} alt="" />
+            <Figure onClick={openCloseMenuCart}>
+                <img src={cart} alt="Carrito" title="Carrito" />
             </Figure>
         )
     }
     return(
-        <Figure onClick={addProduct} className='with-products'>
-            <Img src={cartWithProducts} alt=""/>
+        <Figure className='with-products' onClick={openCloseMenuCart}>
+            <Img src={cartWithProducts} alt="Carrito" title="Carrito" />
         </Figure>
     )
 }

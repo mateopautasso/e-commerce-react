@@ -1,7 +1,12 @@
+// Comps
+import arrow from '../assets/icons/flechita.png';
+import CardLogout from "./CardLogout";
+// Deps
 import { styled } from "styled-components";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import arrow from '../assets/icons/flechita.png';
+import { useContext } from "react";
+import { HeaderContext } from "../context/HeaderContext";
 
 const MenuDesktopContainer = styled.div`
     display: flex;
@@ -26,13 +31,18 @@ const LoginP = styled.p`
 
 function MenuDesktop() {
 
-  const { email } = useSelector(store => store.user) 
+  const { email } = useSelector(store => store.user);
+  const { openCloseMenuDesktop } = useContext(HeaderContext);
 
   if(email) {
     return (
         <MenuDesktopContainer>
             <P>{email}</P>
-            <figure style={{width: '7px', marginTop: '2px'}}>
+            <CardLogout />
+            <figure
+              style={{width: '7px', marginTop: '2px'}}
+              onClick={openCloseMenuDesktop}
+            >
                 <img src={arrow} alt="" style={stylesArrow}/>
             </figure>
         </MenuDesktopContainer>

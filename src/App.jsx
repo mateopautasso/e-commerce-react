@@ -1,16 +1,19 @@
 // Css
 import './App.css';
-import ResetCss from './utils/reset-css/ResetCss';
+import ResetCss from './utils/ResetCss';
 import StylesVariables from './components/styles-variables/StylesVariables';
 
 // Comps
 import Header from './layouts/Header';
-import CreateAccount from './pages/CreateAccount';
 import Home from './pages/Home'
-import Login from './pages/Login'
+import CreateAccount from './pages/CreateAccount';
+import Registered from './pages/Registered';
+import Login from './pages/Login';
 
-// Utils
+// Contexts
 import store from './app/store';
+import { LoadingContextProvider } from "./context/LoadingContext";
+import { HeaderContextProvider } from "./context/HeaderContext";
 
 // Deps
 import { ThemeProvider } from 'styled-components';
@@ -25,12 +28,17 @@ function App() {
       <ResetCss />
       <ThemeProvider theme={StylesVariables}>
         <Provider store={store}>
-          <Header />
-          <Routes>
-            <Route path='/e-commerce-react' element={<Home />} />
-            <Route path='/e-commerce-react/login' element={<Login />} />
-            <Route path='/e-commerce-react/create' element={<CreateAccount />} />
-          </Routes>
+          <HeaderContextProvider>
+            <Header />
+          </HeaderContextProvider>
+          <LoadingContextProvider>
+            <Routes>
+              <Route path='/e-commerce-react' element={<Home />} />
+              <Route path='/e-commerce-react/login' element={<Login />} />
+              <Route path='/e-commerce-react/create' element={<CreateAccount />} />
+              <Route path='/e-commerce-react/registered' element={<Registered />} />
+            </Routes>
+          </LoadingContextProvider>
         </Provider>
       </ThemeProvider>
     </>

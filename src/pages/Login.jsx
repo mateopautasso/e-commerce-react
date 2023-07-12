@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 import CampForm from '../components/CampForm';
 import { PrimaryButton, SectionTitle, ErrorP } from '../components/styled-components/StyledComponents';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAccountInLocalStorage } from '../utils/account-local-storage';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
@@ -41,6 +41,7 @@ const CreateAccountContainer = styled.div`
 `
 
 function Login() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
@@ -56,7 +57,7 @@ function Login() {
     const response = getAccountInLocalStorage(emailInput, passwordInput);
     if(typeof response === 'object') {
       dispatch(logIn(response));
-
+      navigate("/e-commerce-react");
     } else {
       setErrorForm(response)
     }

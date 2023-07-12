@@ -4,6 +4,7 @@ import { PrimaryButton, SectionTitle } from '../components/styled-components/Sty
 import { setAccountInLocalStorage } from '../utils/account-local-storage';
 import { useState } from 'react';
 import { ErrorP } from '../components/styled-components/StyledComponents';
+import { useNavigate } from 'react-router-dom';
 
 
 const MainContainer = styled.main`
@@ -29,7 +30,7 @@ const FormContainer = styled.form`
 
 
 function Login() {
-
+  const navigate = useNavigate();
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
   const [repeatPasswordInput, setRepeatPasswordInput] = useState('');
@@ -38,9 +39,13 @@ function Login() {
   const handleButton = (email, password, repeatPasswordInput)=>{
     if(emailInput && passwordInput) {
       const response = setAccountInLocalStorage(email, password, repeatPasswordInput);
-      response ? setErrorForm(response) : setErrorForm('')
-    } else setErrorForm('Campos incompletos')
-
+      if(response) {
+        setErrorForm(response)
+      } else {
+        setErrorForm('');
+        navigate("/e-commerce-react/registered");
+      }
+    } else setErrorForm('Campos incompletos');
   }
 
   const handleEmail = (e)=>{
