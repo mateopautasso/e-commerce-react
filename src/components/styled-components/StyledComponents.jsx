@@ -45,6 +45,10 @@ export function PrimaryButton({text, action, isSecondary}) {
 export const Loader = styled.div`
     height: 6rem;
     width: 6rem;
+    position: absolute;
+    z-index: -1;
+    top: 50%;
+    left: 47.4%;
 
     /* Create a curve at the top */
     border: 6px solid #F7F7F7;

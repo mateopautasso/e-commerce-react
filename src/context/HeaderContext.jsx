@@ -5,9 +5,13 @@ export const HeaderContext = createContext();
 
 export function HeaderContextProvider({children}) {
 
+    const [menuMobile, setMenuMobile] = useState(false);
     const [menuDesktop, setMenuDesktop] = useState(false);
     const [menuCart, setMenuCart] = useState(false);
 
+    const openCloseMenuMobile = ()=>{
+        setMenuMobile(!menuMobile)
+    }
     const openCloseMenuDesktop = ()=>{
         setMenuDesktop(!menuDesktop)
     }
@@ -15,7 +19,7 @@ export function HeaderContextProvider({children}) {
         setMenuCart(!menuCart)
     }
     return(
-        <HeaderContext.Provider value={{menuDesktop, openCloseMenuDesktop, menuCart, openCloseMenuCart}}>
+        <HeaderContext.Provider value={{menuMobile, openCloseMenuMobile, menuDesktop, openCloseMenuDesktop, menuCart, openCloseMenuCart}}>
             {children}
         </HeaderContext.Provider>
     )

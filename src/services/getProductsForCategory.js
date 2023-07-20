@@ -1,38 +1,35 @@
-// export const getAllProduct = async (loadingTrue, loadingFalse) => {
-//     let products = [];
-//     try {
-//         loadingTrue()
-//         const request = await fetch("https://dummyjson.com/products");
-//         const response = await request.json();
-//         const listProducts = response.products;
-//         products = [...listProducts];
-//         return products;
-//     } catch (error) {
-//         console.log(error);
-//         return [];
-//     } finally {
-//         loadingFalse()
-//         console.log("Petición finalizada");
-//     }
-// }
+const getProductsForCategory = async (page, limit, category, changeLoader) => {
+    let skip = 0;
+    if(page > 1) {
+        skip = limit * (page - 1);
+    }
+    let products = {
+        productList: [],
+        total: 0
+    };
 
-export const getProductsForCategory = async (arrayOfCategories, loadingTrue, loadingFalse) => {
-    let products = [];
     try {
-        loadingTrue()
-        for(let i of arrayOfCategories) {
-            const request = await fetch(`https://dummyjson.com/products/category/${i}`);
-            const response = await request.json();
-            const listProducts = response.products;
-            products = [...products,...listProducts];
+        changeLoader(true);
+        let request;
+        let response;
+        if(category === 'all') {
+            request = await fetch(`https://dummyjson.com/products?limit=${limit}&skip=${skip}`);
+        } else {
+            request = await fetch(`https://dummyjson.com/products/category/${category}?limit=${limit}&skip=${skip}`);
         }
-    } catch (error) {
+        response = await request.json();
+        products.productList = [...response.products];
+        products.total = response.total;
+    } 
+    catch (error) {
         console.log(error);
         alert("Error en la respuesta proporcionada por la base de datos, por favor seleccione otra categoría")
-        return [];
-    } finally {
-        loadingFalse()
+        return products;
+    }
+    finally {
+        changeLoader(false)
         console.log("Petición finalizada");
     }
     return products;
 }
+export default getProductsForCategory;

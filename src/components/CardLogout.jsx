@@ -12,7 +12,7 @@ const Card = styled.div`
     box-shadow: 0px 0px 3px 0px rgba(199,199,199,1);
     background-color: white;
     position: absolute;
-    top: 61px;
+    top: 66px;
     right: 81px;
     border-radius: 4px;
     display: flex;
@@ -31,7 +31,7 @@ const Pgreen = styled.p`
     font-size: ${(props)=>props.theme.fontSm};
     font-weight: ${(props)=>props.theme.font700};
     color: ${(props)=>props.theme.hospitalGreen};
-`
+`;
 
 function CardLogout() {
 

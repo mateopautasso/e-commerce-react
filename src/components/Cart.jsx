@@ -26,17 +26,24 @@ const Img = styled.img`
 function Cart() {
 
     const { inCart } = useSelector(store => store.cart);
-    const { openCloseMenuCart } = useContext(HeaderContext)
+    const { openCloseMenuCart, openCloseMenuMobile, menuMobile } = useContext(HeaderContext);
+
+    const handleClick = ()=>{
+        if(menuMobile) {
+            openCloseMenuMobile();
+        }
+        openCloseMenuCart();
+    }
 
     if(inCart.length === 0) {
         return (
-            <Figure onClick={openCloseMenuCart}>
+            <Figure onClick={handleClick}>
                 <img src={cart} alt="Carrito" title="Carrito" />
             </Figure>
         )
     }
     return(
-        <Figure className='with-products' onClick={openCloseMenuCart}>
+        <Figure className='with-products' onClick={handleClick}>
             <Img src={cartWithProducts} alt="Carrito" title="Carrito" />
         </Figure>
     )

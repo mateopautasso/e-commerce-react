@@ -12,7 +12,7 @@ import Login from './pages/Login';
 
 // Contexts
 import store from './app/store';
-import { LoadingContextProvider } from "./context/LoadingContext";
+import { HomeContextProvider } from "./context/HomeContext";
 import { HeaderContextProvider } from "./context/HeaderContext";
 
 // Deps
@@ -31,14 +31,14 @@ function App() {
           <HeaderContextProvider>
             <Header />
           </HeaderContextProvider>
-          <LoadingContextProvider>
+          <HomeContextProvider>
             <Routes>
               <Route path='/e-commerce-react' element={<Home />} />
               <Route path='/e-commerce-react/login' element={<Login />} />
               <Route path='/e-commerce-react/create' element={<CreateAccount />} />
               <Route path='/e-commerce-react/registered' element={<Registered />} />
             </Routes>
-          </LoadingContextProvider>
+          </HomeContextProvider>
         </Provider>
       </ThemeProvider>
     </>

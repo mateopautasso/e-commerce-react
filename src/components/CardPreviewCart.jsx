@@ -1,5 +1,5 @@
 // Comps
-import { SectionTitle } from "./styled-components/StyledComponents";
+import { SectionTitle, PrimaryButton } from "./styled-components/StyledComponents";
 // Deps
 import { styled } from "styled-components";
 import ProductInCart from "./ProductInCart";
@@ -26,6 +26,18 @@ const MainContainer = styled.div`
     &.active {
       transform: translateX(-410px);
     }
+    @media (max-width: 1024px) {
+        width: 100%;
+        padding: 12px 100px;
+        right: -1020px;
+        &.active {
+            transform: translateX(-1020px);
+        }
+    }
+    @media (max-width: 600px) {
+        width: 100%;
+        padding: 12px 16px;
+    }
 `;
 const TopContainer = styled.div`
     display: flex;
@@ -36,6 +48,7 @@ const TopContainer = styled.div`
 const BottomContainer = styled.div`
     display: flex;
     flex-direction: column;
+    gap: 12px;
 `;
 const ProductsContainer = styled.div`
     width: 100%;
@@ -58,6 +71,20 @@ const ArrowClose = styled.p`
     font-size: 2.5rem;
     cursor: pointer;
 `;
+const PriceContainer = styled.div`
+    width: 100%;
+    height: 70px;
+    padding: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    background-color: ${(props)=>props.theme.textInputGrey};
+`
+const TotalPriceP = styled.p`
+    font-size: ${(props)=>props.theme.fontSm};
+    font-weight: ${(props)=>props.theme.font700};
+`
 const Price = styled.p`
     font-family: ${(props)=>props.theme.sf};
     font-weight: ${(props)=>props.theme.font700}
@@ -98,13 +125,22 @@ function CardPreviewCart({isActive}) {
                 </ProductsContainer>
             </TopContainer>
             <BottomContainer>
-                <Price>
-                {
-                    inCart.map(product => product.price).reduce((accumulated, accumulator)=>{
-                        return accumulated + accumulator;
-                    }, 0)
-                }
-                </Price>
+                <PriceContainer>
+                    <TotalPriceP>
+                        Total:
+                    </TotalPriceP>
+                    <Price>
+                        $&nbsp;
+                        {
+                            inCart.map(product => product.price).reduce((accumulated, accumulator)=>{
+                                return accumulated + accumulator;
+                            }, 0)
+                        },00
+                    </Price>
+                </PriceContainer>
+                <PrimaryButton
+                    text="Realizar compra"
+                    action={()=>alert("Hasta acá han llegado las funcionalidades del sitio!")}/>
             </BottomContainer>
         </MainContainer>
     )

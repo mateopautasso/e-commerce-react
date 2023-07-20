@@ -49,11 +49,12 @@ function CardProduct({src, price, title, id, stock, description}) {
 
     const { email } = useSelector(store => store.user);
     const { inCart } = useSelector(store => store.cart);
-    const [added, setAdded] = useState(false)
     const dispatch = useDispatch();
 
+    const [added, setAdded] = useState(false);
+
     const addOrRemoveProductToCart = (id, title, price, stock, description, src)=>{
-        if(!email) alert("Débes iniciar sesión para agregar productos al carro")
+        if(!email) alert("Debes iniciar sesión para agregar productos al carro!");
         if(!added && email) {
             dispatch(addToCart({
                 id,
@@ -63,12 +64,12 @@ function CardProduct({src, price, title, id, stock, description}) {
                 description,
                 src
             }))
-            setAdded(true)
+            setAdded(true);
         } else {
             dispatch(removeToCart({
                 id
             }))
-            setAdded(false)
+            setAdded(false);
         }
     }
     const isProductInCart = (id)=>{
@@ -78,7 +79,7 @@ function CardProduct({src, price, title, id, stock, description}) {
   return (
     <MainContainer>
         <Figure>
-            <Img src={src} />
+            <Img src={src} alt={title} title={title}/>
         </Figure>
         <InfoContainer>
             <div style={{display: 'flex', flexDirection: 'column', gap:'4px', maxWidth: '170px'}}>
@@ -90,9 +91,10 @@ function CardProduct({src, price, title, id, stock, description}) {
                 onClick={() => addOrRemoveProductToCart(id, title, price, stock, description, src)}
                 >
                 <img
+                style={{width: '40x', height: '40px'}}
                 src={isProductInCart(id) ? imgAddedToCart : imgAddToCart}
-                alt={title}
-                title={title}/>
+                alt="Agregar producto al carrito"
+                title="Agregar producto al carrito"/>
             </figure>
         </InfoContainer>
     </MainContainer>

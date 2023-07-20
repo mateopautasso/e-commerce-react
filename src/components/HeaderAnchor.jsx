@@ -1,11 +1,14 @@
 import { styled } from "styled-components";
 import { useDispatch } from "react-redux";
 import { changeCategory } from "../app/categorySlice/categorySlice";
+import { setPage } from "../app/paginationSlice/paginationSlice";
+import { useContext } from "react";
+import { HeaderContext } from "../context/HeaderContext";
 
 const HeaderAnchors = styled.a`
     font-size: ${(props)=>props.theme.fontMd};
     font-weight: ${(props)=>props.theme.font500};
-    color: ${(props)=>props.theme.softPinkGrey};
+    color: ${(props)=>props.theme.grey};
     display: block;
     border-radius: 8px;
     padding: 8px 14px;
@@ -15,11 +18,19 @@ const HeaderAnchors = styled.a`
         color: ${(props)=>props.theme.hospitalGreen};
     }
 `;
+const HeaderAnchorsMobile = styled.a`
+    font-size: ${(props)=>props.theme.fontMd};
+    font-weight: ${(props)=>props.theme.font700};
+    color: ${(props)=>props.theme.black};
+    display: block;
+    border-radius: 8px;
+`;
 
-function HeaderAnchor({ category, children, isActive }) {
+export function HeaderAnchor({ category, children, isActive }) {
 
     const dispatch = useDispatch();
     const handleClick = (category)=>{
+        dispatch(setPage(1))
         dispatch(changeCategory(category))
     }
 
@@ -30,4 +41,20 @@ function HeaderAnchor({ category, children, isActive }) {
   )
 }
 
-export default HeaderAnchor;
+export function HeaderAnchorMobile({ category, children }) {
+
+    const dispatch = useDispatch();
+    const { openCloseMenuMobile } = useContext(HeaderContext);
+
+    const handleClick = (category)=>{
+        dispatch(setPage(1));
+        openCloseMenuMobile();
+        dispatch(changeCategory(category));
+    }
+
+  return (
+    <HeaderAnchorsMobile onClick={() => handleClick(category)}>
+        {children}
+    </HeaderAnchorsMobile>
+  )
+}
